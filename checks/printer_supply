@@ -83,6 +83,8 @@ def printer_supply_fix_infos(info):
 
         if " S/N:" in line_0:
             line_0 = line_0[:line_0.find(" S/N:")]
+        if "SN" in line_0:
+            line_0 = line_0[:line_0.find("SN")]
 
         new_info.append([line_0, unit_info, max_capacity, level, class_, color])
     return new_info
@@ -117,8 +119,7 @@ def check_printer_supply(item, params, info):
             level = saveint(level)
 
             color_info = ""
-            if color and color.lower() not in item.lower():
-                color_info = "[%s] " % color
+
 
             # Assume 100% as maximum when 0 is reported
             # Saw some toner cartridge reporting value=0 and max_capacity=0 on empty toner
